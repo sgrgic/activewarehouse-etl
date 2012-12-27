@@ -500,6 +500,12 @@ module ETL #:nodoc:
       say "Avg before_writes: #{Engine.rows_read/benchmarks[:before_writes]} rows/sec" if benchmarks[:before_writes] > 0
       say "Avg transforms: #{Engine.rows_read/benchmarks[:transforms]} rows/sec" if benchmarks[:transforms] > 0
       say "Avg writes: #{Engine.rows_read/benchmarks[:writes]} rows/sec" if benchmarks[:writes] > 0
+      if errors.length > 0
+        say "Dumping all errors:"
+        errors.each do |e|
+          say "****Error: #{e.inspect}"
+        end
+      end
 
       # say "Avg time writing execution records: #{ETL::Execution::Record.average_time_spent}"
       # 
